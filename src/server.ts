@@ -1,7 +1,7 @@
 import "dotenv/config";
 import app from "./app";
 import { logger } from "./utils/logger";
-import { connectToDB } from "./config/db";
+import { connectToDB } from "./db/db";
 const port = process.env.PORT || 5000;
 
 const startServer = async () => {
