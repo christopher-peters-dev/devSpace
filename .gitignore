@@ -1,0 +1,41 @@
+# Dependency directories (Never commit node_modules)
+node_modules/
+jspm_packages/
+
+# Environment variables (Sensitive data)
+.env
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: Testing and Coverage
+coverage/
+.nyc_output/
