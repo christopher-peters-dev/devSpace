@@ -8,7 +8,5 @@ export const logger = winston.createLogger({
       return `[${level.toUpperCase()}] ${timestamp}: ${message}`;
     }),
   ),
-  transports: [
-    new winston.transports.Console(), // 👈 REQUIRED
-  ],
+  transports: [new winston.transports.Console()],
 });

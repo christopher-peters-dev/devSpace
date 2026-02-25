@@ -1,33 +1,20 @@
-import express, {
-  Express,
-  json,
-  Request,
-  Response,
-  NextFunction,
-} from "express";
-import userRoutes from "./routes/api/user.routes";
-import profileRoutes from "./routes/api/profile.routes";
-import postRoutes from "./routes/api/post.routes";
-import authRoutes from "./routes/api/auth.routes";
+import express, { Express, json } from "express";
+import userRoutes from "./modules/users/user.routes";
+import profileRoutes from "./modules/profiles/profile.routes";
+import postRoutes from "./modules/posts/post.routes";
+import authRoutes from "./modules/auth/auth.routes";
+import {
+  handleErrors,
+  InvalidRouteHandler,
+} from "./common/middleware/errorHandler";
 import cors from "cors";
 const app: Express = express();
 app.use(cors());
 app.use(json());
-app.get("/", (req, res) => {
-  res.send("Hello Dev Connector");
-});
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  const status = err.status || 500;
-  const message = err.message || "Internal Server Error";
-
-  res.status(status).json({
-    success: false,
-    status,
-    message,
-  });
-});
 app.use("/api/users", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use(InvalidRouteHandler);
+app.use(handleErrors);
 export default app;
