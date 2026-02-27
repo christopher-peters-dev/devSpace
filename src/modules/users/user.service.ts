@@ -19,7 +19,11 @@ export const registerUserService = async (data: CreateUserDTO) => {
     };
     return await User.create(user);
   } catch (err: any) {
-    logger.error(err);
+    logger.error({
+      message: "registerUserService failed",
+      email,
+      error: err,
+    });
     throw err;
   }
 };
