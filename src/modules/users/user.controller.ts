@@ -6,10 +6,10 @@ export const registerUser = async (
   next: NextFunction,
 ) => {
   try {
-    const user = await registerUserService(req.body);
+    const authData = await registerUserService(req.body);
     res.status(201).json({
       success: true,
-      data: user,
+      data: authData,
     });
   } catch (err: any) {
     next(err);

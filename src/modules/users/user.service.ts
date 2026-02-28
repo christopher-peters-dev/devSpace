@@ -39,8 +39,10 @@ export const registerUserService = async (data: CreateUserDTO) => {
         id: user.id,
       },
     };
-    jwt.sign(payload, config.get("jwtSecret"));
-    return "User registered";
+    const token = jwt.sign(payload, config.get("jwtSecret") as string, {
+      expiresIn: 36000,
+    });
+    return { token };
   } catch (err: any) {
     logger.error({
       message: "registerUserService failed",
