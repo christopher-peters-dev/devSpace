@@ -9,16 +9,14 @@ type AuthTokenPayload = JwtPayload & {
 };
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.header("Authorization");
+  const xAuthToken = req.header("x-auth-token");
+  const authorizationHeader = req.header("Authorization");
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return next({
-      status: 401,
-      message: "No token, authorization denied",
-    });
-  }
-
-  const token = authHeader.split(" ")[1];
+  const token =
+    xAuthToken ||
+    (authorizationHeader?.startsWith("Bearer ")
+      ? authorizationHeader.split(" ")[1]
+      : null);
 
   if (!token) {
     return next({
@@ -44,10 +42,11 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     req.user = { id: userId };
     next();
   } catch (err: any) {
-    return next({
-      status: 401,
-      message: "Token is not valid",
-    });
+    const message =
+      err instanceof jwt.TokenExpiredError
+        ? "Token has expired"
+        : "Token is not valid";
+    return next({ status: 401, message });
   }
 };
 

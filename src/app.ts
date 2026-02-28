@@ -12,7 +12,7 @@ const app: Express = express();
 app.use(cors());
 app.use(json());
 app.use("/api/users", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/posts", postRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use(InvalidRouteHandler);
