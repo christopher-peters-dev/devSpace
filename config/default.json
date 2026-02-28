@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://wandering-dev:Jeshu%400903@devconnector.itcyzo6.mongodb.net/?appName=DevConnector"
+  "mongoURI": "mongodb+srv://wandering-dev:Jeshu%400903@devconnector.itcyzo6.mongodb.net/devspace?appName=DevConnector",
+  "jwtSecret":"mysecrettoken"
 }
